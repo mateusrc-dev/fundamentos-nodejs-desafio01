@@ -32,4 +32,43 @@ export class Database {
 
     return data
   }
+
+  update(table, id, data) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+    console.log(rowIndex)
+
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex] = { 
+        id, 
+        ...data,
+        completed_at: this.#database[table][rowIndex].completed_at, 
+        created_at: this.#database[table][rowIndex].created_at, 
+        updated_at: new Date(), 
+      }
+      this.#persist()
+    }
+  }
+
+  updateComplete(table, id) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id)
+
+    console.log(rowIndex)
+
+    if (rowIndex > -1) {
+      this.#database[table][rowIndex].completed_at = true
+      this.#persist()
+    }
+  }
+
+  delete(table, id) {
+    const newTasks = this.#database[table].filter(row => row.id !== id)
+
+    console.log(newTasks)
+
+    if (newTasks) {
+      this.#database[table] = newTasks
+      this.#persist()
+    }
+  }
 }
