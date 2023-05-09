@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { Database } from './database.js'
 import { buildRoutePath } from './utils/build-route-path.js'
+import { handleFileCSV } from './utils/read-cvs.js'
 const database = new Database()
 
 export const routes = [
@@ -31,6 +32,14 @@ export const routes = [
         updated_at: new Date(),
       }
       database.insert('tasks', task)
+      return res.writeHead(201).end()
+    }
+  },
+  {
+    method: 'POST',
+    path: buildRoutePath('/tasks/file'),
+    handler: (req, res) => {
+      handleFileCSV(req)
       return res.writeHead(201).end()
     }
   },
