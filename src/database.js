@@ -29,6 +29,16 @@ export class Database {
     return data
   }
 
+  selectById(table, id) {
+    let data = this.#database[table] ?? []
+
+    if (data) {
+      data = data.filter(row => row.id === id)
+    }
+
+    return data
+  }
+
   insert(table, data) {
     if (Array.isArray(this.#database[table])) {
       this.#database[table].push(data)
@@ -43,8 +53,6 @@ export class Database {
 
   update(table, id, data) {
     const rowIndex = this.#database[table].findIndex(row => row.id === id)
-
-    console.log(rowIndex)
 
     if (rowIndex > -1) {
       this.#database[table][rowIndex] = { 

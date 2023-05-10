@@ -20,10 +20,30 @@ export const routes = [
     }
   },
   {
+    method: 'GET',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (req, res) => {
+      const id = req.params.id
+
+      const task = database.selectById('tasks', id)
+      return res.end(JSON.stringify(task))
+    }
+  },
+  {
     method: 'POST',
     path: buildRoutePath('/tasks'),
     handler: (req, res) => {
       const { title, description } = req.body
+      if (!title) {
+        return res.writeHead(400).end(
+            JSON.stringify({message: 'title is required'})
+          )
+      }
+      if (!description) {
+        return res.writeHead(400).end(
+            JSON.stringify({message: 'description is required'})
+          )
+      }
       const task = {
         id: randomUUID(),
         title,
@@ -50,6 +70,18 @@ export const routes = [
     handler: (req, res) => {
       const id = req.params.id
       const { title, description } = req.body
+      const task = database.selectById('tasks', id)
+
+      if (task.length === 0) {
+        return res.writeHead(400).end(
+            JSON.stringify({message: 'id not found'})
+          )
+      }
+      if (!description) {
+        return res.writeHead(400).end(
+            JSON.stringify({message: 'description is required'})
+          )
+      }
       database.update('tasks', id, {
         title,
         description,
