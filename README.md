@@ -15,10 +15,10 @@ In this project we create routes for the user to be able to:
 To run the project just use the command: npm run dev
 You can use insomnia to make the requests. Create files in insomnia with the following HTTP and Path methods (where 'id' is to put the task id in place):
 
-POST - localhost:3333/tasks
-GET - localhost:3333/tasks - this route can use query params
-PUT - localhost:3333/tasks
-DELETE - localhost:3333/tasks/id
-PATCH - localhost:3333/tasks/id/complete
-POST - localhost:3333/tasks/newTasks
-GET - localhost:3333/tasks/id
+- POST - localhost:3333/tasks
+- GET - localhost:3333/tasks - this route can use query params
+- PUT - localhost:3333/tasks
+- DELETE - localhost:3333/tasks/id
+- PATCH - localhost:3333/tasks/id/complete
+- POST - localhost:3333/tasks/newTasks
+- GET - localhost:3333/tasks/id
