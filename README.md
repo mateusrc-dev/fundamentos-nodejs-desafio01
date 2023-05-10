@@ -20,5 +20,4 @@ You can use insomnia to make the requests. Create files in insomnia with the fol
 - PUT - localhost:3333/tasks
 - DELETE - localhost:3333/tasks/id
 - PATCH - localhost:3333/tasks/id/complete
-- POST - localhost:3333/tasks/newTasks
 - GET - localhost:3333/tasks/id

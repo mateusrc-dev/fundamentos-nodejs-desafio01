@@ -1,7 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import { Database } from './database.js'
 import { buildRoutePath } from './utils/build-route-path.js'
-import { run } from './streams/import-csv.js'
 
 const database = new Database()
 
@@ -53,14 +52,6 @@ export const routes = [
         updated_at: new Date(),
       }
       database.insert('tasks', task)
-      return res.writeHead(201).end()
-    }
-  },
-  {
-    method: 'POST',
-    path: buildRoutePath('/tasks/newTasks'),
-    handler: (req, res) => {
-      run()
       return res.writeHead(201).end()
     }
   },
