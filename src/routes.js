@@ -74,7 +74,7 @@ export const routes = [
 
       if (task.length === 0) {
         return res.writeHead(400).end(
-            JSON.stringify({message: 'id not found'})
+            JSON.stringify({message: 'task not found'})
           )
       }
       if (!description) {
@@ -95,6 +95,14 @@ export const routes = [
     path: buildRoutePath('/tasks/:id/complete'),
     handler: (req, res) => {
       const id = req.params.id
+      const task = database.selectById('tasks', id)
+
+      if (task.length === 0) {
+        return res.writeHead(400).end(
+            JSON.stringify({message: 'task not found'})
+          )
+      }
+
       database.updateComplete('tasks', id)
       
       return res.writeHead(204).end()
